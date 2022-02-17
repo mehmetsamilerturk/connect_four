@@ -39,14 +39,28 @@ describe Game do
       end
     end
 
-    context 'when 4 discs are together diagonally' do
+    context 'when 4 discs are together diagonally(positive)' do
       before do
-        allow(game_turn).to receive(:gets).and_return(0)
+        allow(game_turn).to receive(:gets).and_return(0, 1, 2, 2, 1, 3, 3, 3, 3, 4, 2)
         allow(game_turn).to receive(:print_board)
         allow(game_turn).to receive(:print)
       end
 
-      xit 'displays a message and stops loop' do
+      it 'displays a message and stops loop' do
+        message = "\nPLAYER 1 WINS!".red
+        expect(game_turn).to receive(:puts).with(message)
+        game_turn.play_turn(player1, player2)
+      end
+    end
+
+    context 'when 4 discs are together diagonally(negative)' do
+      before do
+        allow(game_turn).to receive(:gets).and_return(0, 0, 0, 1, 0, 1, 1, 6, 3, 2, 2)
+        allow(game_turn).to receive(:print_board)
+        allow(game_turn).to receive(:print)
+      end
+
+      it 'displays a message and stops loop' do
         message = "\nPLAYER 1 WINS!".red
         expect(game_turn).to receive(:puts).with(message)
         game_turn.play_turn(player1, player2)

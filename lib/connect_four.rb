@@ -28,7 +28,7 @@ class Game
         print "#{'Player 1'.red}'s turn: "
         @column = gets
         @column = @column.to_i
-        
+
         if valid?(@board, @column)
           row = next_available_row(@board, @column)
           drop_disc(@board, row, @column, player1)
@@ -82,7 +82,22 @@ class Game
     end
 
     # positive diagonal
+    (@column_size - 3).times do |c|
+      (@row_size - 3).times do |r|
+        if board[r][c] == player.disc && board[r + 1][c + 1] == player.disc && board[r + 2][c + 2] == player.disc && board[r + 3][c + 3] == player.disc
+          result = true
+        end
+      end
+    end
 
+    # negative diagonal
+    (@column_size - 3).times do |c|
+      (3..(@row_size - 1)).each do |r|
+        if board[r][c] == player.disc && board[r - 1][c + 1] == player.disc && board[r - 2][c + 2] == player.disc && board[r - 3][c + 3] == player.disc
+          result = true
+        end
+      end
+    end
 
     result
   end
