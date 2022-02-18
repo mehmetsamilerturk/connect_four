@@ -127,6 +127,8 @@ class Game
 
   def print_board
     @board.reverse.each { |row| p row }
+    puts '_____________________'
+    puts ' 0  1  2  3  4  5  6'
   end
 
   private
@@ -151,6 +153,5 @@ class Player
   end
 end
 
- game = Game.new
- game.play_game
-# p game.board[2][3]
+game = Game.new
+game.play_game
