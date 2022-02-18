@@ -56,6 +56,11 @@ class Game
         end
       end
 
+      if draw(@board)
+        puts 'DRAW!'
+        return
+      end
+
       turn += 1
       turn = turn % 2
     end
@@ -102,6 +107,10 @@ class Game
     result
   end
 
+  def draw(board)
+    board.flatten.all? { |cell| cell.between?(1, 2) }
+  end
+
   def drop_disc(board, row, column, player)
     board[row][column] = player.disc
   end
@@ -142,6 +151,6 @@ class Player
   end
 end
 
-# game = Game.new
-# game.play_game
+ game = Game.new
+ game.play_game
 # p game.board[2][3]
